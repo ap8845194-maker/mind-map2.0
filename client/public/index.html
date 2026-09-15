@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mind Mirror 2.0</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+<!-- =====================================================
+     LOGIN PAGE
+===================================================== -->
+
+<div id="loginPage" class="login-page">
+
+    <div class="login-background"></div>
+
+    <div class="login-card">
+
+        <div class="brand-large">
+            <div class="brain-logo">🧠</div>
+
+            <h1>Mind Mirror</h1>
+
+            <p>Intelligent Mood Based Study Assistant</p>
+        </div>
+
+
+        <div class="login-tabs">
+
+            <button
+                id="loginTab"
+                class="tab active"
+                onclick="showLogin()">
+                Login
+            </button>
+
+            <button
+                id="registerTab"
+                class="tab"
+                onclick="showRegister()">
+                Register
+            </button>
+
+        </div>
+
+
+        <!-- LOGIN FORM -->
+
+        <form id="loginForm" onsubmit="loginUser(event)">
+
+            <div class="input-group">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="Enter your email"
+                    required>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Enter your password"
+                    required>
+
+            </div>
+
+
+            <button class="login-button">
+                Sign In →
+            </button>
+
+        </form>
+
+
+        <!-- REGISTER FORM -->
+
+        <form
+            id="registerForm"
+            class="hidden"
+            onsubmit="registerUser(event)">
+
+            <div class="input-group">
+
+                <label>Your Name</label>
+
+                <input
+                    type="text"
+                    id="registerName"
+                    placeholder="Enter your name"
+                    required>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    id="registerEmail"
+                    placeholder="Enter your email"
+                    required>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="registerPassword"
+                    placeholder="Create a password"
+                    required>
+
+            </div>
+
+
+            <button class="login-button">
+                Create Account →
+            </button>
+
+        </form>
+
+
+        <p class="login-note">
+            🔒 Your data stays in your browser.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MAIN APPLICATION
+===================================================== -->
+
+<div id="app" class="app hidden">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+
+            <span>🧠</span>
+
+            <div>
+                <strong>Mind Mirror</strong>
+                <small>2.0</small>
+            </div>
+
+        </div>
+
+
+        <nav>
+
+            <button
+                class="nav-item active"
+                onclick="showSection('dashboard', this)">
+                📊 Dashboard
+            </button>
+
+
+            <button
+                class="nav-item"
+                onclick="showSection('mood', this)">
+                🧠 Mood Analysis
+            </button>
+
+
+            <button
+                class="nav-item"
+                onclick="showSection('study', this)">
+                📚 Study Room
+            </button>
+
+
+            <button
+                class="nav-item"
+                onclick="showSection('analytics', this)">
+                📈 1-Year Analytics
+            </button>
+
+
+            <button
+                class="nav-item"
+                onclick="showSection('history', this)">
+                🗓️ History
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button
+                class="theme-button"
+                onclick="toggleTheme()">
+
+                <span id="themeIcon">🌙</span>
+
+                <span>Theme</span>
+
+            </button>
+
+
+            <button
+                class="logout-button"
+                onclick="logoutUser()">
+
+                🚪 Logout
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="top-label">
+                    INTELLIGENT STUDY SYSTEM
+                </p>
+
+                <h2 id="pageTitle">
+                    Dashboard
+                </h2>
+
+            </div>
+
+
+            <div class="profile">
+
+                <div class="profile-avatar">
+                    👨🏻‍💻
+                </div>
+
+                <div>
+
+                    <strong id="userName">
+                        Student
+                    </strong>
+
+                    <small>
+                        Student Account
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             DASHBOARD
+        ================================================== -->
+
+        <section id="dashboard" class="page-section">
+
+
+            <div class="welcome-card">
+
+                <div>
+
+                    <span class="welcome-tag">
+                        ✨ PERSONALIZED FOR YOU
+                    </span>
+
+                    <h1>
+                        Welcome back,
+                        <span id="welcomeName">
+                            Student
+                        </span>!
+                    </h1>
+
+                    <p>
+                        Let's make today's study session
+                        productive and balanced.
+                    </p>
+
+                </div>
+
+
+                <div class="welcome-icon">
+                    🧠
+                </div>
+
+            </div>
+
+
+            <!-- STAT CARDS -->
+
+            <div class="stat-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+                        ⏱️
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Study Time
+                        </span>
+
+                        <strong id="dashMinutes">
+                            0
+                        </strong>
+
+                        <small>
+                            minutes
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        📚
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Sessions
+                        </span>
+
+                        <strong id="dashSessions">
+                            0
+                        </strong>
+
+                        <small>
+                            completed
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        🔥
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Streak
+                        </span>
+
+                        <strong id="dashStreak">
+                            0
+                        </strong>
+
+                        <small>
+                            days
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        🎯
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Goal
+                        </span>
+
+                        <strong id="dashGoal">
+                            0%
+                        </strong>
+
+                        <small>
+                            completed
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DASHBOARD CHART -->
+
+            <div class="dashboard-grid">
+
+
+                <div class="glass-card large-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="mini-label">
+                                PERFORMANCE
+                            </span>
+
+                            <h3>
+                                Weekly Study Activity
+                            </h3>
+
+                        </div>
+
+                        <span class="chart-badge">
+                            Last 7 Days
+                        </span>
+
+                    </div>
+
+
+                    <div class="chart-container">
+
+                        <canvas id="weeklyChart"></canvas>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUICK MOOD -->
+
+                <div class="glass-card mood-summary">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="mini-label">
+                                TODAY
+                            </span>
+
+                            <h3>
+                                Current Mood
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="dashboardMood"
+                        class="mood-big">
+
+                        😊
+
+                    </div>
+
+
+                    <h3
+                        id="dashboardMoodText">
+
+                        Not selected
+
+                    </h3>
+
+
+                    <p
+                        id="dashboardMoodAdvice">
+
+                        Select your mood to get an
+                        AI-style recommendation.
+
+                    </p>
+
+
+                    <button
+                        class="primary-button"
+                        onclick="showSectionById('mood')">
+
+                        Analyze My Mood →
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- GOAL -->
+
+            <div class="glass-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <span class="mini-label">
+                            DAILY TARGET
+                        </span>
+
+                        <h3>
+                            Today's Study Goal
+                        </h3>
+
+                    </div>
+
+                    <strong
+                        id="goalPercentage">
+                        0%
+                    </strong>
+
+                </div>
+
+
+                <div class="goal-progress">
+
+                    <div
+                        id="goalProgressBar">
+                    </div>
+
+                </div>
+
+
+                <div class="goal-footer">
+
+                    <span>
+                        <strong id="goalMinutes">
+                            0
+                        </strong>
+                        / 360 minutes
+                    </span>
+
+                    <span>
+                        Keep going 🚀
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             MOOD ANALYSIS
+        ================================================== -->
+
+        <section
+            id="mood"
+            class="page-section hidden">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="mini-label">
+                        AI-STYLE ANALYSIS
+                    </span>
+
+                    <h1>
+                        How are you feeling today?
+                    </h1>
+
+                    <p>
+                        Your mood helps Mind Mirror
+                        personalize your study strategy.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="mood-grid">
+
+
+                <button
+                    class="mood-option"
+                    onclick="analyzeMood('Happy', this)">
+
+                    <span>😄</span>
+
+                    <strong>Happy</strong>
+
+                    <small>Positive & energetic</small>
+
+                </button>
+
+
+                <button
+                    class="mood-option"
+                    onclick="analyzeMood('Normal', this)">
+
+                    <span>🙂</span>
+
+                    <strong>Normal</strong>
+
+                    <small>Balanced & ready</small>
+
+                </button>
+
+
+                <button
+                    class="mood-option"
+                    onclick="analyzeMood('Tired', this)">
+
+                    <span>😴</span>
+
+                    <strong>Tired</strong>
+
+                    <small>Low energy</small>
+
+                </button>
+
+
+                <button
+                    class="mood-option"
+                    onclick="analyzeMood('Stressed', this)">
+
+                    <span>😟</span>
+
+                    <strong>Stressed</strong>
+
+                    <small>Under pressure</small>
+
+                </button>
+
+
+                <button
+                    class="mood-option"
+                    onclick="analyzeMood('Frustrated', this)">
+
+                    <span>😤</span>
+
+                    <strong>Frustrated</strong>
+
+                    <small>Need a reset</small>
+
+                </button>
+
+            </div>
+
+
+            <!-- AI RESULT -->
+
+            <div
+                id="aiResult"
+                class="ai-result">
+
+                <div class="ai-animation">
+                    🤖
+                </div>
+
+                <div>
+
+                    <span class="ai-label">
+                        MIND MIRROR AI
+                    </span>
+
+                    <h2>
+                        Waiting for your mood...
+                    </h2>
+
+                    <p>
+                        Select a mood above to receive
+                        your personalized study analysis.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             STUDY ROOM
+        ================================================== -->
+
+        <section
+            id="study"
+            class="page-section hidden">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="mini-label">
+                        FOCUS MODE
+                    </span>
+
+                    <h1>
+                        Study Room
+                    </h1>
+
+                    <p>
+                        Start a focused study session.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="study-layout">
+
+
+                <!-- TIMER -->
+
+                <div class="glass-card timer-panel">
+
+                    <span class="mini-label">
+                        POMODORO SESSION
+                    </span>
+
+                    <div
+                        id="studyTimer"
+                        class="study-timer">
+
+                        25:00
+
+                    </div>
+
+
+                    <div class="timer-status"
+                         id="timerStatus">
+
+                        Ready to focus
+
+                    </div>
+
+
+                    <div class="timer-buttons">
+
+                        <button
+                            class="primary-button"
+                            onclick="startTimer()">
+
+                            ▶ Start
+
+                        </button>
+
+                        <button
+                            class="secondary-button"
+                            onclick="pauseTimer()">
+
+                            ⏸ Pause
+
+                        </button>
+
+                        <button
+                            class="secondary-button"
+                            onclick="resetTimer()">
+
+                            ↻ Reset
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TASK -->
+
+                <div class="glass-card">
+
+                    <span class="mini-label">
+                        STUDY TASK
+                    </span>
+
+                    <h2>
+                        What are you studying?
+                    </h2>
+
+                    <input
+                        id="studyTask"
+                        class="modern-input"
+                        placeholder="e.g. JavaScript, Economics, Mathematics...">
+
+
+                    <div class="task-suggestions">
+
+                        <button onclick="setTask('Programming')">
+                            💻 Programming
+                        </button>
+
+                        <button onclick="setTask('Mathematics')">
+                            📐 Mathematics
+                        </button>
+
+                        <button onclick="setTask('Revision')">
+                            📖 Revision
+                        </button>
+
+                        <button onclick="setTask('Reading')">
+                            📚 Reading
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        class="primary-button full-button"
+                        onclick="startStudySession()">
+
+                        🚀 Start Study Session
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             1 YEAR ANALYTICS
+        ================================================== -->
+
+        <section
+            id="analytics"
+            class="page-section hidden">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="mini-label">
+                        LONG-TERM PROGRESS
+                    </span>
+
+                    <h1>
+                        1-Year Analytics
+                    </h1>
+
+                    <p>
+                        See how your study habits develop
+                        throughout the year.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- YEAR STATS -->
+
+            <div class="stat-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+                        📚
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Study
+                        </span>
+
+                        <strong id="yearMinutes">
+                            0
+                        </strong>
+
+                        <small>
+                            minutes
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        📅
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Active Days
+                        </span>
+
+                        <strong id="activeDays">
+                            0
+                        </strong>
+
+                        <small>
+                            days
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        🎯
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Average
+                        </span>
+
+                        <strong id="averageMinutes">
+                            0
+                        </strong>
+
+                        <small>
+                            min/session
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        🔥
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Best Streak
+                        </span>
+
+                        <strong id="bestStreak">
+                            0
+                        </strong>
+
+                        <small>
+                            days
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- YEAR CHART -->
+
+            <div class="glass-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <span class="mini-label">
+                            12-MONTH OVERVIEW
+                        </span>
+
+                        <h3>
+                            Study Progress Throughout the Year
+                        </h3>
+
+                    </div>
+
+                    <span class="chart-badge">
+                        1 Year
+                    </span>
+
+                </div>
+
+
+                <div class="year-chart">
+
+                    <canvas id="yearChart"></canvas>
+
+                </div>
+
+            </div>
+
+
+            <!-- MONTHLY GRID -->
+
+            <div class="glass-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <span class="mini-label">
+                            MONTHLY PERFORMANCE
+                        </span>
+
+                        <h3>
+                            Your Year in Review
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="monthlyGrid"
+                    class="monthly-grid">
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             HISTORY
+        ================================================== -->
+
+        <section
+            id="history"
+            class="page-section hidden">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="mini-label">
+                        YOUR JOURNEY
+                    </span>
+
+                    <h1>
+                        Study & Mood History
+                    </h1>
+
+                </div>
+
+            </div>
+
+
+            <div class="history-layout">
+
+
+                <div class="glass-card">
+
+                    <div class="card-header">
+
+                        <h3>
+                            Mood History
+                        </h3>
+
+                    </div>
+
+                    <div
+                        id="moodHistoryList"
+                        class="history-list">
+
+                    </div>
+
+                </div>
+
+
+                <div class="glass-card">
+
+                    <div class="card-header">
+
+                        <h3>
+                            Completed Sessions
+                        </h3>
+
+                    </div>
+
+                    <div
+                        id="taskHistoryList"
+                        class="history-list">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
